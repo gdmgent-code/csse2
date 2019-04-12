@@ -2,12 +2,12 @@ window.onload = function () {
     start()
 }
 
-let image, imageAnalysisLoaderElement, imageLabelsElement, imagePreviewElement
+let image, imageAnalysisLabelsElement, imageAnalysisLoaderElement, imagePreviewElement
 
 function start() {
     image = new Image()
+    imageAnalysisLabelsElement = document.getElementById('image-analysis-labels')
     imageAnalysisLoaderElement = document.getElementById('image-analysis-loader')
-    imageLabelsElement = document.getElementById('image-labels')
     imagePreviewElement = document.getElementById('image-preview')
     document.getElementById('image-input').addEventListener('change', imageInputChangedHandler)
 }
@@ -16,17 +16,17 @@ function imageInputChangedHandler(event) {
     image.src = URL.createObjectURL(event.target.files[0])
     imagePreviewElement.src = image.src
     imageAnalysisLoaderElement.style.display = 'block'
+    imageAnalysisLabelsElement.innerHTML = ''
     detect()
 }
 
 async function detect() {
-    const version = 2
-    const alpha = .75
-    const model = await mobilenet.load(version, alpha)
+    const VERSION = 2
+    const ALPHA = .75
+    const model = await mobilenet.load(VERSION, ALPHA)
 
     const predictions = await model.classify(image)
     showPredictions(predictions)
-    console.log('Predictions:', predictions)
 
     console.log('Logits:')
     const logits = model.infer(image)
@@ -40,7 +40,7 @@ async function detect() {
 function showPredictions(predictions) {
     imageAnalysisLoaderElement.style.display = 'none'
     const liClass = [
-        'my-1'
+        'mt-2'
     ].join(' ')
     const spanClass = [
         'align-middle',
@@ -50,5 +50,5 @@ function showPredictions(predictions) {
         'rounded-full',
         'text-white',
     ].join(' ')
-    imageLabelsElement.innerHTML = predictions.map(prediction => `<li class="${liClass}"><span class="${spanClass}">${Math.round(prediction.probability * 100)}%</span> ${prediction.className}</li>`).join('\n')
+    imageAnalysisLabelsElement.innerHTML = predictions.map(prediction => `<li class="${liClass}"><span class="${spanClass}">${Math.round(prediction.probability * 100)}%</span> ${prediction.className}</li>`).join('\n')
 }
