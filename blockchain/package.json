@@ -1,0 +1,14 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "Blockchain demo",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node --experimental-modules --no-warnings ./src/main.mjs"
+  },
+  "author": "Olivier Parent",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  }
+}
