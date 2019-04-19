@@ -1,0 +1,12 @@
+{
+  "name": "cryptography",
+  "version": "1.0.0",
+  "description": "Cryptography demo",
+  "main": "src/main.mjs",
+  "scripts": {
+    "start-js": "node --experimental-modules --no-warnings ./src/main.mjs",
+    "start-php": "php ./src/main.php"
+  },
+  "author": "Olivier Parent",
+  "license": "MIT"
+}

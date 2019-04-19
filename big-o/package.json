@@ -1,0 +1,11 @@
+{
+  "name": "big-o",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "repl": "echo Copy and paste the next line to load functions: && echo && echo 'eval(`${fs.readFileSync(\"main.js\")}`)' && echo && echo Exit Node.js REPL with: && echo && echo .exit && echo && node"
+  },
+  "author": "Olivier Parent",
+  "license": "MIT"
+}
