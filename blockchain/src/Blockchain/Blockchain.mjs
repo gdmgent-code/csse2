@@ -2,11 +2,11 @@ import { Block } from './Block.mjs'
 
 export class Blockchain {
   constructor() {
-    this.chain = [this.createGenesis()];
+    this.chain = [this.createGenesisBlock()]
   }
 
-  createGenesis() {
-    return new Block(0, "01/01/2017", "Genesis block", "0")
+  createGenesisBlock() {
+    return new Block('This is the genesis block')
   }
 
   latestBlock() {
@@ -14,25 +14,25 @@ export class Blockchain {
   }
 
   addBlock(newBlock) {
-    newBlock.previousHash = this.latestBlock().hash;
-    newBlock.hash = newBlock.calculateHash();
-    this.chain.push(newBlock);
+    newBlock.previousHash = this.latestBlock().hash
+    newBlock.hash = newBlock.calculateHash()
+    this.chain.push(newBlock)
   }
 
-  checkValid() {
+  isValid() {
     for (let i = 1; i < this.chain.length; i++) {
-      const currentBlock = this.chain[i];
-      const previousBlock = this.chain[i - 1];
+      const currentBlock = this.chain[i]
+      const previousBlock = this.chain[i - 1]
 
       if (currentBlock.hash !== currentBlock.calculateHash()) {
-        return false;
+        return false
       }
 
       if (currentBlock.previousHash !== previousBlock.hash) {
-        return false;
+        return false
       }
     }
 
-    return true;
+    return true
   }
 }

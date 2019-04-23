@@ -1,9 +1,21 @@
 import { Block } from './Blockchain/Block.mjs'
-import { Blockchain } from './Blockchain/Blockchain.mjs'
+import { Blockchain} from './Blockchain/Blockchain.mjs'
+import sleepRandom from './utilities.mjs'
 
-let jsChain = new Blockchain();
-jsChain.addBlock(new Block("12/25/2017", {amount: 5}))
-jsChain.addBlock(new Block("12/26/2017", {amount: 10}))
-
-console.log(JSON.stringify(jsChain, null, 4));
-console.log("Is blockchain valid? " + jsChain.checkValid())
+(async function () {
+  const theBlockchain = new Blockchain()
+  await sleepRandom()
+  theBlockchain.addBlock(new Block({
+    amount: 1
+  }))
+  await sleepRandom()
+  theBlockchain.addBlock(new Block({
+    amount: 2
+  }))
+  await sleepRandom()
+  theBlockchain.addBlock(new Block({
+    amount: 3
+  }))
+  console.log(JSON.stringify(theBlockchain, null, 4))
+  console.log(`The blockchain is ${theBlockchain.isValid() ? 'valid' : 'invalid'}!`)
+})()

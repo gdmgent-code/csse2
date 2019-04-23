@@ -1,23 +1,15 @@
 import crypto from 'crypto'
 
 export class Block {
-  constructor(timestamp, data) {
-    this.timestamp = timestamp
+  constructor(data, previousHash = '') {
+    this.timestamp = new Date().toISOString()
     this.data = data
-
-    this.previousHash = '0'
+    this.previousHash = previousHash
     this.hash = this.calculateHash()
-    this.nonce = 0
   }
 
   calculateHash() {
-    const hash = crypto.createHash('sha256')
-    hash.update(this.index + this.previousHash + this.timestamp + this.data + this.nonce)
-    return hash.digest('hex')
+    const data = this.previousHash + this.timestamp + JSON.stringify(this.data)
+    return crypto.createHash('sha256').update(data).digest('hex')
   }
-
-  mineBlock(difficulty) {
-
-  }
-
 }
