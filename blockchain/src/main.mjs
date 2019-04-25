@@ -1,6 +1,6 @@
 import { Block } from './Blockchain/Block.mjs'
-import { Blockchain} from './Blockchain/Blockchain.mjs'
-import sleepRandom from './utilities.mjs'
+import { Blockchain } from './Blockchain/Blockchain.mjs'
+import { color, sleepRandom } from './utils.mjs'
 
 (async function () {
   const theBlockchain = new Blockchain()
@@ -16,6 +16,7 @@ import sleepRandom from './utilities.mjs'
   theBlockchain.addBlock(new Block({
     amount: 3
   }))
-  console.log(JSON.stringify(theBlockchain, null, 4))
-  console.log(`The blockchain is ${theBlockchain.isValid() ? 'valid' : 'invalid'}!`)
+  // console.log(c)
+  console.log(color.fg.blue + JSON.stringify(theBlockchain, null, 4), color.reset)
+  console.log(`The blockchain is ${theBlockchain.isValid() ? color.fg.green + 'valid' : color.fg.red + 'invalid'}${color.reset}!`)
 })()
