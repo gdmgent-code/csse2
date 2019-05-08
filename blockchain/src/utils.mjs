@@ -28,7 +28,7 @@ export const color = {
   }
 }
 
-export async function sleepRandom(seconds = 5) {
+export async function sleepRandom (seconds = 5) {
   const promise = new Promise(resolve => {
     const ms = Math.round(Math.random() * 1000 * seconds)
     setTimeout(() => resolve(`Slept for ${color.bright}${ms}ms${color.reset}.`))

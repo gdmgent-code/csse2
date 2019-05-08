@@ -1,27 +1,27 @@
 import { Block } from './Block.mjs'
 
 export class Blockchain {
-  constructor() {
+  constructor () {
     this.chain = []
     this.createGenesisBlock()
   }
 
-  addBlock(block) {
+  addBlock (block) {
     block.previousHash = this.getLastBlock().hash
     block.updateHash()
     this.chain.push(block)
   }
 
-  createGenesisBlock() {
+  createGenesisBlock () {
     const genesisBlock = new Block()
     this.chain.push(genesisBlock)
   }
 
-  getLastBlock() {
+  getLastBlock () {
     return this.chain[this.chain.length - 1]
   }
 
-  isValid() {
+  isValid () {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i]
       if (!this.isDataIntegrityValid(currentBlock)) {
@@ -36,11 +36,11 @@ export class Blockchain {
     return true
   }
 
-  isChainIntegrityValid(previousBlock, currentBlock) {
+  isChainIntegrityValid (previousBlock, currentBlock) {
     return previousBlock.hash === currentBlock.previousHash
   }
 
-  isDataIntegrityValid(block) {
+  isDataIntegrityValid (block) {
     return block.hash === block.calculateHash()
   }
 }
