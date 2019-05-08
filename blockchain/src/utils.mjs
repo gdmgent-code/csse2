@@ -33,5 +33,6 @@ export async function sleepRandom(seconds = 5) {
     const ms = Math.round(Math.random() * 1000 * seconds)
     setTimeout(() => resolve(`Slept for ${color.bright}${ms}ms${color.reset}.`))
   })
-  console.log(await promise)
+  const message = await promise
+  console.log(message)
 }

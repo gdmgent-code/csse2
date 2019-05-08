@@ -10,13 +10,16 @@ import { color, sleepRandom } from './utils.mjs'
   }))
   await sleepRandom()
   theBlockchain.addBlock(new Block({
-    amount: 2
+    amount: 22
   }))
   await sleepRandom()
   theBlockchain.addBlock(new Block({
-    amount: 3
+    amount: 333
   }))
-  // console.log(c)
-  console.log(color.fg.blue + JSON.stringify(theBlockchain, null, 4), color.reset)
+  await sleepRandom()
+  theBlockchain.addBlock(new Block({
+    amount: 4444
+  }))
+  console.log(theBlockchain)
   console.log(`The blockchain is ${theBlockchain.isValid() ? color.fg.green + 'valid' : color.fg.red + 'invalid'}${color.reset}!`)
 })()

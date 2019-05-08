@@ -4,7 +4,8 @@
   "description": "Blockchain demo",
   "main": "src/main.mjs",
   "scripts": {
-    "start": "node --experimental-modules --no-warnings ./src/main.mjs"
+    "start": "node --experimental-modules --no-warnings ./src/main.mjs",
+    "dev": "node --experimental-modules ./src/main.mjs"
   },
   "author": "Olivier Parent",
   "license": "MIT"

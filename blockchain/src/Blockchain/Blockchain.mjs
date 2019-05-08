@@ -2,37 +2,45 @@ import { Block } from './Block.mjs'
 
 export class Blockchain {
   constructor() {
-    this.chain = [this.createGenesisBlock()]
+    this.chain = []
+    this.createGenesisBlock()
+  }
+
+  addBlock(block) {
+    block.previousHash = this.getLastBlock().hash
+    block.updateHash()
+    this.chain.push(block)
   }
 
   createGenesisBlock() {
-    return new Block('This is the genesis block')
+    const genesisBlock = new Block()
+    this.chain.push(genesisBlock)
   }
 
-  latestBlock() {
+  getLastBlock() {
     return this.chain[this.chain.length - 1]
-  }
-
-  addBlock(newBlock) {
-    newBlock.previousHash = this.latestBlock().hash
-    newBlock.hash = newBlock.calculateHash()
-    this.chain.push(newBlock)
   }
 
   isValid() {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i]
-      const previousBlock = this.chain[i - 1]
-
-      if (currentBlock.hash !== currentBlock.calculateHash()) {
+      if (!this.isDataIntegrityValid(currentBlock)) {
         return false
       }
-
-      if (currentBlock.previousHash !== previousBlock.hash) {
+      const previousBlock = this.chain[i - 1]
+      if (!this.isChainIntegrityValid(previousBlock, currentBlock)) {
         return false
       }
     }
 
     return true
+  }
+
+  isChainIntegrityValid(previousBlock, currentBlock) {
+    return previousBlock.hash === currentBlock.previousHash
+  }
+
+  isDataIntegrityValid(block) {
+    return block.hash === block.calculateHash()
   }
 }
